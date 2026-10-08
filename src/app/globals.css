@@ -1,0 +1,426 @@
+@import "tailwindcss";
+
+/* Streamdown (markdown streaming asisten): pastikan utilitas di outputnya ikut ter-compile. */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --shadow-xs: var(--elevation-xs);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+}
+
+@theme {
+  --color-canvas: #f5f1e9;
+  --color-paper: #fbfaf6;
+  --color-ink: #232a33;
+  --color-ink-soft: #64696f;
+  --color-terra: #a8562f;
+  --color-rule: #e7e1d4;
+  --color-debit: #3e7c5a;
+  --color-credit: #9c5a38;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  /* Motion — Paper & Ink Matte.
+     Aturan: entering/exiting pakai --ease-out; gerak di layar pakai
+     --ease-in-out; drawer/sheet pakai --ease-drawer; hover/warna pakai
+     ease bawaan; marquee/progress pakai linear. Jangan pakai kurva
+     ease-in untuk UI. --duration-slow/--duration-spring hanya untuk
+     marketing/eksplanatori; UI interaktif maksimal 240ms. */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 400ms;
+  --duration-spring: 320ms;
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 1rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  --border: var(--color-rule);
+  --card: var(--color-paper);
+  --elevation-xs: 0 1px 2px rgb(35 42 51 / 0.04);
+  --elevation-sm: 0 1px 2px rgb(35 42 51 / 0.04), 0 6px 16px rgb(35 42 51 / 0.05);
+  --elevation-md: 0 1px 2px rgb(35 42 51 / 0.05), 0 12px 32px rgb(35 42 51 / 0.07), 0 24px 64px rgb(35 42 51 / 0.05);
+  --gutter: 1.5rem;
+  --gutter-lg: 2rem;
+  --color-glow: color-mix(in oklab, var(--color-terra) 14%, transparent);
+}
+
+.dark {
+  --background: oklch(0.205 0.01 60);
+  --foreground: oklch(0.92 0.02 80);
+  --card: oklch(0.245 0.012 65);
+  --card-foreground: oklch(0.92 0.02 80);
+  --popover: oklch(0.245 0.012 65);
+  --popover-foreground: oklch(0.92 0.02 80);
+  --primary: oklch(0.68 0.13 45);
+  --primary-foreground: oklch(0.16 0.02 60);
+  --secondary: oklch(0.29 0.015 65);
+  --secondary-foreground: oklch(0.92 0.02 80);
+  --muted: oklch(0.29 0.015 65);
+  --muted-foreground: oklch(0.72 0.02 75);
+  --accent: oklch(0.29 0.015 65);
+  --accent-foreground: oklch(0.92 0.02 80);
+  --destructive: oklch(0.704 0.191 22.216);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.55 0.05 60);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.245 0.012 65);
+  --sidebar-foreground: oklch(0.92 0.02 80);
+  --sidebar-primary: oklch(0.68 0.13 45);
+  --sidebar-primary-foreground: oklch(0.16 0.02 60);
+  --sidebar-accent: oklch(0.29 0.015 65);
+  --sidebar-accent-foreground: oklch(0.92 0.02 80);
+  --sidebar-border: oklch(0.34 0.018 65);
+  --sidebar-ring: oklch(0.55 0.05 60);
+
+  /* Paper & Ink — Lilin: warm charcoal paper, cream ink */
+  --color-canvas: #1b1713;
+  --color-paper: #241f19;
+  --color-ink: #ede4d7;
+  --color-ink-soft: #a89a88;
+  --color-terra: #d06b40;
+  --color-rule: #3d3529;
+  --color-debit: #4cc38a;
+  --color-credit: #d06b40;
+
+  --border: var(--color-rule);
+  --card: var(--color-paper);
+  --elevation-xs: 0 1px 2px rgb(0 0 0 / 0.4);
+  --elevation-sm: 0 1px 2px rgb(0 0 0 / 0.4), 0 6px 16px rgb(0 0 0 / 0.35);
+  --elevation-md: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 32px rgb(0 0 0 / 0.4), 0 24px 64px rgb(0 0 0 / 0.3);
+}
+
+/* Keterbacaan mode Lilin: teks putih gagal AA di atas terra terang,
+   jadi permukaan terra otomatis memakai teks kanvas gelap. */
+.dark .bg-terra.text-white,
+.dark .dark\:bg-terra.dark\:text-white {
+  color: var(--color-canvas);
+}
+
+/* Laporan keuangan dicetak selalu gaya kertas terang, sekalipun mode gelap aktif. */
+@media print {
+  .dark {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: var(--color-paper);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --border: var(--color-rule);
+    --input: oklch(0.922 0 0);
+
+    --color-canvas: #f5f1e9;
+    --color-paper: #fbfaf6;
+    --color-ink: #232a33;
+    --color-ink-soft: #64696f;
+    --color-terra: #a8562f;
+    --color-rule: #e7e1d4;
+    --color-debit: #3e7c5a;
+    --color-credit: #9c5a38;
+  }
+}
+
+html { background-color: var(--color-canvas); }
+
+/* Matte paper — ultra-fine grain, luminous but not glossy */
+@media not print {
+  html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.018;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+}
+
+/* Motion respect — kurangi dan lembutkan, bukan nol: matikan gerak
+   berulang/posisi, pertahankan feedback opacity yang membantu pemahaman.
+   Primitif motion/* sudah branch useReducedMotion() sendiri. Elemen
+   notifikasi/banner yang harus tetap fade lembut diberi .motion-keep-fade. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .motion-keep-fade {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* Matte card surface — soft, not glassy */
+.matte-card {
+  box-shadow: var(--elevation-sm);
+  transition: box-shadow var(--duration-base, 240ms) var(--ease-out-soft, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+/* Auth scene — slow spotlight drift (cinematic ambient, transform-only).
+   Dihentikan otomatis oleh aturan prefers-reduced-motion di bawah. */
+@keyframes auth-drift {
+  from { transform: translateX(-4%); }
+  to { transform: translateX(4%); }
+}
+.auth-drift {
+  animation: auth-drift 26s linear infinite alternate;
+}
+
+/* Auth scene — lapisan background beranimasi (semua transform-only).
+   Beams bergeser pelan, orb terra bernapas. Dihentikan otomatis oleh
+   aturan prefers-reduced-motion di bawah. */
+@keyframes beams-pan {
+  from { transform: translateX(-3%); }
+  to { transform: translateX(3%); }
+}
+.beams-pan {
+  animation: beams-pan 34s linear infinite alternate;
+}
+@keyframes orb-drift {
+  from { transform: translate(-10%, -6%) scale(1); }
+  to { transform: translate(8%, 10%) scale(1.15); }
+}
+.orb-drift {
+  animation: orb-drift 22s ease-in-out infinite alternate;
+}
+
+/* Ledger stamp — one-time approval flourish (pricing badge).
+   Dihentikan otomatis oleh aturan prefers-reduced-motion di bawah. */
+@keyframes stamp-in {
+  from { opacity: 0; transform: scale(1.4) rotate(-10deg); }
+  to { opacity: 1; transform: scale(1) rotate(-3deg); }
+}
+.stamp-in {
+  animation: stamp-in 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Baris tabel — entri berjenjang singkat untuk menandai pergantian halaman/filter.
+   Delay dibatasi 6 langkah (±84ms) supaya baris ke-7 dan seterusnya tidak menunggu. */
+@keyframes row-enter {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.row-enter {
+  animation: row-enter var(--duration-base, 240ms) var(--ease-out-soft, cubic-bezier(0.22, 1, 0.36, 1)) both;
+  animation-delay: calc(min(var(--row-i, 0), 6) * 14ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .row-enter { animation-delay: 0ms !important; }
+}
+
+/* Cincin fokus 3px untuk kontrol kustom (nav, chip, tab, segmen):
+   shadcn Button sudah membawa ring sendiri; kelas ini untuk sisanya. */
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.focus-ring:focus-visible {
+  outline-color: color-mix(in oklab, var(--color-terra) 55%, transparent);
+}
+
+/* Tabular numerals everywhere money appears */
+.tnum { font-feature-settings: "tnum" 1; }
+
+/* Classic accounting double rule under totals */
+.rule-double { border-bottom: 4px double var(--color-ink); }
+
+/* Swiss 2.0 soft — resep tabel data: header kecil uppercase, angka tabular */
+.data-table {
+  @apply w-full min-w-[640px];
+}
+.data-table th {
+  @apply text-[11px] font-medium uppercase tracking-widest text-ink-soft;
+}
+.data-table td {
+  @apply border-border/60 border-b;
+}
+.data-table .num {
+  font-feature-settings: "tnum" 1;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Paper & Ink Matte Mini Scrollbar */
+.paper-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--color-ink-soft) 28%, transparent) transparent;
+}
+.paper-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.paper-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.paper-scrollbar::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--color-ink-soft) 25%, transparent);
+  border-radius: 9999px;
+  transition: background var(--duration-fast, 150ms) var(--ease-out-soft, cubic-bezier(0.22, 1, 0.36, 1));
+}
+.paper-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--color-ink-soft) 55%, transparent);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Print Optimization for Formal Accounting Sheets */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 1.5cm 1.2cm;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+  }
+  header, nav, aside, .topbar, [role="navigation"] {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .rule-double {
+    border-bottom: 3px double #000000 !important;
+  }
+}
+
+/* Skin Streamdown (jawaban asisten) ke token Paper & Ink. */
+[data-streamdown="table-wrapper"] {
+  margin-block: 0.75rem;
+}
+[data-streamdown="table-wrapper"] [data-streamdown="table"] {
+  border-color: var(--color-rule);
+}
+[data-streamdown="table-header"] {
+  background: color-mix(in oklab, var(--color-terra) 8%, transparent);
+}
+[data-streamdown="table-header-cell"] {
+  color: var(--color-ink);
+}
+[data-streamdown="table-cell"] {
+  color: var(--color-ink);
+  border-color: var(--color-rule);
+}
+[data-streamdown="code-block"] {
+  border: 1px solid var(--color-rule);
+}
+[data-streamdown="blockquote"] {
+  border-left-color: var(--color-terra);
+  color: var(--color-ink-soft);
+}
+[data-streamdown="link"] {
+  color: var(--color-terra);
+}
+
+/* Hormati pengurangan gerak: matikan animasi token streaming. */
+@media (prefers-reduced-motion: reduce) {
+  [data-sd-animate] {
+    animation: none;
+  }
+  [aria-label="Akunio sedang berpikir"] *,
+  [aria-label="Akunio sedang berpikir"] {
+    animation: none !important;
+  }
+}
+
