@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   title: "Akunio — Tidak Perlu Jago Akuntansi, Biarkan AI yang Mencatat",
   description:
     "Akunio mengubah foto nota dan chat santai menjadi jurnal berpasangan seimbang (Debit = Kredit) serta laporan keuangan siap pakai untuk UKM. Fokus kembangkan usaha Anda.",
-  metadataBase: new URL("https://aiapp.today"),
+  metadataBase: new URL("https://www.aiapp.today"),
   alternates: { canonical: "/" },
   openGraph: {
     title: "Akunio — Tidak Perlu Jago Akuntansi, Biarkan AI yang Mencatat",
@@ -277,13 +277,13 @@ export default function LandingPageV4() {
       {
         "@type": "Organization",
         name: "Samara Digital Technology",
-        url: "https://aiapp.today",
+        url: "https://www.aiapp.today",
         email: "luckyanggara@aiapp.today",
       },
       {
         "@type": "WebSite",
         name: "Akunio",
-        url: "https://aiapp.today",
+        url: "https://www.aiapp.today",
       },
       {
         "@type": "FAQPage",
