@@ -25,6 +25,17 @@ export const metadata: Metadata = {
   title: "Akunio — Tidak Perlu Jago Akuntansi, Biarkan AI yang Mencatat",
   description:
     "Akunio mengubah foto nota dan chat santai menjadi jurnal berpasangan seimbang (Debit = Kredit) serta laporan keuangan siap pakai untuk UKM. Fokus kembangkan usaha Anda.",
+  metadataBase: new URL("https://aiapp.today"),
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Akunio — Tidak Perlu Jago Akuntansi, Biarkan AI yang Mencatat",
+    description:
+      "Akunio mengubah foto nota dan chat santai menjadi jurnal berpasangan seimbang (Debit = Kredit) serta laporan keuangan siap pakai untuk UKM. Fokus kembangkan usaha Anda.",
+    url: "/",
+    locale: "id_ID",
+    type: "website",
+  },
+  robots: { index: true, follow: true },
 };
 
 const NAV_LINKS = [
@@ -259,13 +270,37 @@ function SectionHead({
   );
 }
 
-export default function LandingV4Page() {
+export default function LandingPageV4() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "Samara Digital Technology",
+        url: "https://aiapp.today",
+        email: "luckyanggara@aiapp.today",
+      },
+      {
+        "@type": "WebSite",
+        name: "Akunio",
+        url: "https://aiapp.today",
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: FAQS.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      },
+    ],
+  };
   return (
     <main className="min-h-screen bg-canvas text-ink selection:bg-terra/20 selection:text-ink">
       {/* Topbar Header */}
       <header className="sticky top-0 z-50 border-b border-rule bg-canvas/90 backdrop-blur-md">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <Link href="/v4" className="flex items-center gap-2.5">
+          <Link href="/" className="flex items-center gap-2.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/akunio-logo-mark.svg" alt="Logo Akunio" className="size-8" />
             <span className="font-display text-xl font-bold tracking-tight text-ink">Akunio</span>
@@ -806,6 +841,10 @@ export default function LandingV4Page() {
           <p>Mendukung standar akuntansi SAK EMKM IAI.</p>
         </div>
       </footer>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </main>
   );
 }
